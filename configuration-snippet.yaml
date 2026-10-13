@@ -1,0 +1,10 @@
+# Lägg under lovelace: i configuration.yaml
+lovelace:
+  dashboards:
+    x2d-dashboard:
+      mode: yaml
+      title: X2D
+      icon: mdi:printer-3d
+      show_in_sidebar: true
+      require_admin: false
+      filename: dashboards/x2d.yaml

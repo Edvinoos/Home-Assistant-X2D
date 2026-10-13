@@ -1,0 +1,50 @@
+# Bambu Lab X2D – Home Assistant dashboard (Swedish)
+
+A YAML dashboard with a background image of the printer and live values overlaid
+(temperatures, AMS 2 Pro, slots, fans, print status, camera). Designed for
+the Bambu Lab X2D with AMS 2 Pro. Read-only, except for the light button.
+
+## Requirements
+
+- Bambu Lab integration (`bambu_lab`), tested with version 2.2.26.
+- Custom card **card-mod** via HACS (used for all styling).
+- The printer must be set to LAN Only Liveview for the camera feed (configured on the printer).
+- The printer does not need to be in Developer LAN mode, since the dashboard does not control the printer.
+
+## Installation
+
+1. Copy `images/bakgrund_v2_1920.jpg` into `/config/www/X2D/`.
+   Keep its name as `bakgrund_v2_1920.jpg`. This included v2 background matches
+   the panel positions in `x2d.yaml`. See README.md for additional setup notes.
+2. Copy `x2d.yaml` to `/config/dashboards/x2d.yaml`.
+3. Add the following to `configuration.yaml` under `lovelace:`:
+
+   ```yaml
+   lovelace:
+     dashboards:
+       x2d-dashboard:
+         mode: yaml
+         title: X2D
+         icon: mdi:printer-3d
+         show_in_sidebar: true
+         require_admin: false
+         filename: dashboards/x2d.yaml
+   ```
+
+4. Restart Home Assistant or reload the dashboards, then open the X2D page.
+
+## Change entity names
+
+All entities in the file are named `sensor.sovrum_x2d_*`, `binary_sensor.sovrum_*`,
+`image.sovrum_*`, `camera.sovrum_x2d_camera`, and similar. `sovrum` is the name
+of our printer. Replace the prefix with your own printer name, for example
+`sovrum_` → `verkstad_`, or use find and replace in an editor.
+
+For AMS 2 Pro: replace `sovrum_ams_2_pro_` with your own AMS prefix. Check
+each entity under Developer tools → States before you begin.
+
+## Customize the layout
+
+All positions are expressed as percentages of the image's width and height. If you change
+the background, remeasure the positions of the eight main panels and the printer, then adjust `left`/`top`.
+The comments in the file identify each panel.
